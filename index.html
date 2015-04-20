@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+<body>
+    <script type="text/javascript" src="jsQueryBuilder.js"></script>
+    <script type="text/javascript" src="jsQueryBuilder.Column.js"></script>
+    <script type="text/javascript" src="jsQueryBuilder.Constans.js"></script>
+    <script type="text/javascript" src="jsQueryBuilder.Providers.js"></script>
+    <script>
+        var data = [
+            { id: 1, name:"Person 1", surname: "Surname Person 1", order:7, country: { name:"USA", prefix: "+1" }},
+            { id: 2, name:"Person 2", surname: "Surname Person 2", order:5, country: { name:"USA", prefix: "+1" }},
+            { id: 3, name:"Person 3", surname: "Surname Person 3", order:9, country: { name:"ES", prefix: "+34" }},
+            { id: 4, name:"Person 4", surname: "Surname Person 4", order:15, country: { name:"UK", prefix: "+44" }},
+            { id: 5, name:"Person 5", surname: "Surname Person 5", order:1, country: { name:"USA", prefix: "+1" }},
+            { id: 6, name:"Person 6", surname: "Surname Person 6", order:12, country: { name:"MEX", prefix: "+52" }},
+            { id: 7, name:"Person 7", surname: "Surname Person 7", order:6, country: { name:"USA", prefix: "+1" }},
+            { id: 8, name:"Person 8", surname: "Surname Person 8", order:4, country: { name:"ES", prefix: "+34" }},
+            { id: 9, name:"Person 9", surname: "Surname Person 9", order:14, country: { name:"USA", prefix: "+1" }},
+            { id: 10, name:"Person 10", surname: "Surname Person 10", order:2, country: { name:"USA", prefix: "+1" }},
+            { id: 11, name:"Person 11", surname: "Surname Person 11", order:10, country: { name:"UK", prefix: "+44" }},
+            { id: 12, name:"Person 12", surname: "Surname Person 12", order:2, country: { name:"MEX", prefix: "+52" }},
+            { id: 13, name:"Person 13", surname: "Surname Person 13", order:11, country: { name:"USA", prefix: "+1" }},
+            { id: 14, name:"Person 14", surname: "Surname Person 14", order:3, country: { name:"USA", prefix: "+1" }},
+            { id: 15, name:"Person 15", surname: "Surname Person 15", order:8, country: { name:"USA", prefix: "+1" }},
+        ];
+        
+        function example1() {
+            var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").orderBy("Nombre", true).execute(jsQueryBuilder.providers.toSQL);
+            //var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").execute();11
+            console.log(result);
+        }
+        function example2() {
+            var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").execute(jsQueryBuilder.providers.toURL);
+            //var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").execute();
+            console.log(result);
+        }
+        
+        function example3 () {
+            var result = jsQueryBuilder("id, nombre").from(data).where({id:5}, "=").execute(jsQueryBuilder.providers.toARR);
+            //var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").execute();
+            console.log(JSON.stringify(result, null, 4));
+        }
+        
+        function example4 () {
+            var result = jsQueryBuilder("id, nombre").from(data).orderBy("country.prefix").execute(jsQueryBuilder.providers.toARR);
+            //var result = jsQueryBuilder("id, nombre").from("users").where({id:5}, "=").execute();
+            console.log(JSON.stringify(result, null, 4));
+        }
+    </script>
+</body>
+</html>
